@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # mini-paas
 
 A minimal, from-scratch clone of the `git push` → live deployment flow used by platforms like Heroku and Render — built to understand how PaaS systems actually work under the hood, not just how to use them.
@@ -130,6 +129,3 @@ Small bug, but a good reminder that in Bash, quoting isn't cosmetic — it chang
 ---
 
 Built as a learning project while studying DevOps fundamentals — Linux, shell scripting, Git internals, and Docker.
-=======
-# mini-paas
->>>>>>> ef774bf126e61d2df5ecb6c6428100fc9f2299f9
