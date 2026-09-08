@@ -26,27 +26,29 @@ Big platforms like Heroku and Render sell exactly this experience as a service. 
 git push
    │
    ▼
-post-receive hook fires automatically
+post-receive hook fires
    │
    ▼
-code is checked out into a real working folder
+code is checked out 
    │
    ▼
-docker build → new image created from the code + Dockerfile
+docker build → new image
    │
    ▼
-old container (if any) is stopped and removed
+old container stopped + removed
    │
    ▼
-new container is started, mapped to a local port
+new container is started on a port
    │
    ▼
-app is live at http://localhost:<port>
+Nginx routes a clear URL → that port
+   │
+   ▼
+app is live at http://localhost/myapp
 ```
 
 Everything after `git push` happens with zero manual intervention.
 
----
 
 ## Try it yourself
 
@@ -80,7 +82,16 @@ curl http://localhost:5001
 
 You should see the app respond live — deployed entirely by the hook, triggered by your push.
 
----
+## Managing deployments
+
+A small Python CLI wraps common Docker operations:
+
+```bash
+python3 paas.py list          # see all deployed apps and their status
+python3 paas.py logs myapp    # view recent logs
+python3 paas.py stop myapp    # stop a running app
+python3 paas.py start myapp   # start it again
+```
 
 ## Repo structure
 
@@ -122,10 +133,23 @@ Small bug, but a good reminder that in Bash, quoting isn't cosmetic — it chang
 - [x] Auto-checkout pushed code
 - [x] Auto-build Docker image
 - [x] Auto-replace running container
-- [ ] Python CLI to list apps, view logs, and tear down deployments
-- [ ] Reverse proxy (Nginx) for clean URLs instead of raw ports
+- [x] Python CLI to list apps, view logs, and tear down deployments
+- [x] Reverse proxy (Nginx) for clean URLs instead of raw ports
 - [ ] Support multiple apps at once, not just one hardcoded app name
 
 ---
+
+## Current limitations
+
+This is a proof-of-concept, not a production system. Known constraints:
+
+- Single app only — app name, port, and Nginx route are currently hardcoded, so only one app can be deployed at a time.
+- No dynamic port allocation — a real multi-app version would need to assign each app its own port automatically.
+- No remote push support — deploying requires direct access to the server's bare repo (no SSH key management or auth layer yet).
+- Any pushed app must include its own Dockerfile — the engine is language-agnostic, but relies entirely on Docker to know how to build and run the code.
+
+**Possible next steps:** dynamic app-name/port detection, auto-generated Nginx routes per app, and SSH-based push access for multiple users.
+
+
 
 Built as a learning project while studying DevOps fundamentals — Linux, shell scripting, Git internals, and Docker.
