@@ -6,6 +6,8 @@ Push code to a Git repo, and it automatically gets checked out, built into a Doc
 
 ---
 
+![demo](demo.gif)
+
 ## What this actually does (in plain English)
 
 Normally, deploying code is a manual, fiddly process — like packing a fragile item, driving it to a store, unpacking it, and setting it up on a shelf, every single time something changes.
