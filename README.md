@@ -6,7 +6,14 @@ Push code to a Git repo, and it automatically gets checked out, built into a Doc
 
 ---
 
-![demo](demo.gif)
+![architecture](diagram.svg)
+
+**The hook running after a push:**
+![push output](screenshot-push-1.png)
+![push output](screenshot-push-2.png)
+
+**The app live in the browser:**
+![live app](screenshot-live.png)
 
 ## What this actually does (in plain English)
 
